@@ -26,7 +26,7 @@ function preload() {
     aboutimg=loadImage("about.png")
     bgaboutimg=loadImage("bgabout1.jpg")
     backimg=loadImage("back.gif")
-    level1img=loadImage("level1.gif")
+    level1img=loadImage("level1.png")
 }
 
 function setup() {
@@ -39,9 +39,9 @@ function setup() {
     aboutbackground.visible=false
  // aboutbackground.scale=1.25
 
- level1=createSprite(windowWidth/2,windowHeight/2)
+ level1=createSprite(windowWidth/2,windowHeight/3.8)
     level1.addImage(level1img)
-    level1.scale=1.85
+   // level1.scale=0.85
     level1.visible=false
 
     next = createSprite(width-100,height-80,20,20);
