@@ -4,7 +4,7 @@ var change;
 var change1;
 var bg;
 var claire;
-var player;
+
 var bullet;
 var platform;;
 
@@ -19,6 +19,7 @@ var magazine=55;
 var resetButton;*/
 var about
 var gamestate="wait"
+var player,invisibleground;
 
 function preload() {
     nextimg = loadImage("change.gif");
@@ -27,6 +28,7 @@ function preload() {
     bgaboutimg=loadImage("bgabout1.jpg")
     backimg=loadImage("back.gif")
     level1img=loadImage("level1.png")
+    playerimg=loadImage("girlReady.gif")
 }
 
 function setup() {
@@ -39,17 +41,24 @@ function setup() {
     aboutbackground.visible=false
  // aboutbackground.scale=1.25
 
- level1=createSprite(windowWidth/2,windowHeight/3.8)
+
+ invisibleground=createSprite(windowWidth/2,windowHeight-30,windowWidth,10)
+
+
+ level1=createSprite(windowWidth/2,70)
     level1.addImage(level1img)
-   // level1.scale=0.85
+      level1.scale=1.15
     level1.visible=false
+    level1.velocityX=-1
+    level1.x=width/2
+
 
     next = createSprite(width-100,height-80,20,20);
     next.addImage(nextimg)
    next.scale=0.5
     
    
-   back = createSprite(100,height-80,20,20);
+   back = createSprite(width-80,80,20,20);
    back.addImage(backimg)
   back.scale=0.5
 
@@ -65,6 +74,11 @@ function setup() {
 
     about=createSprite(80,80,20,20)
     about.addImage(aboutimg)
+
+    player=createSprite(100,height-150)
+    player.addImage(playerimg)
+    player.scale=0.85
+    player.visible=false
     
 
     about.visible=false
@@ -84,7 +98,21 @@ function draw() {
         next.visible=true
         
     }
+    else if (gamestate==="level1"){
+        background(0)
+        about.visible=false
+        logo.visible=false
+        next.visible=false
+        aboutbackground.visible=false
+        back.visible=true
 
+        level1.visible=true
+
+        if(level1.x<level1.width/4){
+            level1.x=level1.width/2
+        }
+    
+}
 
     if( mousePressedOver(about)){
         gamestate="info"
@@ -119,26 +147,26 @@ function draw() {
      textSize(35);
      stroke(0)
      strokeWeight(5)
-     text("Follow the below  mentioned instructions to HELP US from these Zombies ...",width/6,150);
+     text("Follow the below  mentioned instructions to HELP US from these Zombies ...",100,150);
      
 
      fill("blue");
      textSize(35);
-     text("-Use 'Right arrow' to run forward.",width/3,250);
+     text("-Use 'Right arrow' to run forward.",200,250);
      textSize(35);
-     text("-Use 'Left arrow' to run backward.",width/3,300);
+     text("-Use 'Left arrow' to run backward.",200,300);
      textSize(35);
-     text("-Use 'Up/Down' to move UP or Down",width/3,350);
+     text("-Use 'Up/Down' to move UP or Down",200,350);
 
      textSize(35);
-     text("-Use 'Space' to shoot ",width/3,400);
+     text("-Use 'Space' to shoot ",200,400);
      
      
      textSize(50);
      fill("red");
      stroke(0)
      strokeWeight(5)
-     text("Don't let zombies enter the city.",width/6,200);
+     text("Don't let zombies enter the city.",200,200);
 
 
         }
@@ -166,6 +194,7 @@ function draw() {
             back.visible=true
 
             level1.visible=true
+            player.visible=true
 
             
         }  
