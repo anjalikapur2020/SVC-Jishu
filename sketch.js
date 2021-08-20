@@ -29,6 +29,9 @@ function preload() {
     backimg=loadImage("back.gif")
     level1img=loadImage("level1.png")
     playerimg=loadImage("girlReady.gif")
+    playerrunning=loadImage("girlRunning.gif")
+    playerback=loadImage("girlReverse.gif")
+                            
 }
 
 function setup() {
@@ -91,6 +94,9 @@ function setup() {
 }
 
 function draw() {
+
+
+   
     if (gamestate==="wait"){
         background(0)
         about.visible=true
@@ -196,8 +202,30 @@ function draw() {
             level1.visible=true
             player.visible=true
 
-            
         }  
+        if (keyDown("RIGHT_ARROW")){
+    
+            player.x=player.x+2
+            player.addImage(playerrunning)
+        }
+
+        if (keyDown("LEFT_ARROW")){
+    
+            player.x=player.x-2
+            player.addImage(playerback)
+
+            
+        }
+
+        if (keyDown("space")){
+            player.velocityY=-8
+            player.addImage(playerback)
+            //player.velocityY= player.velocityY +0.8
+        }
+        
+        
+
+
         if( mousePressedOver(back)){
             gamestate="wait"
             background(0)
@@ -207,6 +235,7 @@ function draw() {
             aboutbackground.visible=false
             back.visible=false
             level1.visible=false
+            player.visible=false
         }
 }
 
